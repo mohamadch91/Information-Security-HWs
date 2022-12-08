@@ -22,7 +22,7 @@ def read_cipher() -> str:
         string: cipher text to be decrypted
     """
     try:
-        with open('cipher.txt', 'rb') as f:
+        with open('EncryptedCipher.txt', 'rb') as f:
             cipher: str = f.read()
             if(cipher == ''):
                 print("cipher file is empty")
@@ -40,7 +40,7 @@ def read_input() -> str:
         string: input text to be encrypted
     """
     try: 
-        with open('input.txt', 'r') as f:
+        with open('plain_input.txt', 'r') as f:
             input :str = f.read()
             if(input == ''):
                 print("Input file is empty")
@@ -51,11 +51,11 @@ def read_input() -> str:
         exit()
 
 #Write encrypted to text file
-def write_encrypted(encrypted: str) -> bool:
+def write_encrypted(encrypted: bytes) -> bool:
     """Write encrypted to text file
 
     Args:
-        encrypted (str): encrypted text
+        encrypted (bytes): encrypted text
     """
     try:
         with open('EncryptedCipher.txt', 'wb') as f:
@@ -65,24 +65,24 @@ def write_encrypted(encrypted: str) -> bool:
         return False
 
 #Write decrypted to text file
-def write_decrypted(decrypted: str) -> None:
+def write_decrypted(decrypted: bytes) -> None:
     """Write decrypted to text file
 
     Args:
-        decrypted (str): decrypted text
+        decrypted (bytes): decrypted text
     """
     try:
-        with open('DecryptedInput.txt', 'w') as f:
+        with open('DecryptedInput.txt', 'wb') as f:
             f.write(decrypted)
         return True
     except:
         return False
 
-def write_key(key: str) -> None:
+def write_key(key: bytes) -> None:
     """Write key to text file
 
     Args:
-        key (str): key to be written to text file
+        key (bytes): key to be written to text file
     """
     try:
         with open('SHA256key.txt', 'wb') as f:
@@ -92,11 +92,11 @@ def write_key(key: str) -> None:
         
         return False
 
-def write_init_vector(init_vector: str) -> None:
+def write_init_vector(init_vector: int) -> None:
     """Write initial vector to text file
 
     Args:
-        init_vector (str): initial vector to be written to text file
+        init_vector (int): initial vector to be written to text file
     """
     try:
         with open('init_vector.txt', 'w') as f:

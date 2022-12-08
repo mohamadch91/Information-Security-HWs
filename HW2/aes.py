@@ -197,6 +197,7 @@ def handle_inputs(inputs: list) -> None:
         decrypt = Decrypt()
         decrypt.decrypt_file()
     elif(inputs == "3"):
+        print("Exiting")
         exit()
     else:
         print("Invalid choice")
