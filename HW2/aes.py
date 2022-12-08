@@ -185,10 +185,14 @@ def handle_inputs(inputs: list) -> None:
             print('Do you want to copy the key and initial vector to new file? (y/n)')
             new_choice = input("Enter your choice : ")
             if(new_choice == "y"):
-                
-
-        encrypt = Encrypt()
-        encrypt.encrypt_file()
+                copy_256_key()
+                copy_init_vector()
+            encrypt = Encrypt()
+            encrypt.encrypt_file()
+        else:
+            print("Exiting")
+            exit()
+        
     elif(inputs == "2"):
         decrypt = Decrypt()
         decrypt.decrypt_file()
@@ -197,13 +201,13 @@ def handle_inputs(inputs: list) -> None:
     else:
         print("Invalid choice")
     
+def main() -> None:
+    while(True):
+        inputs = get_inputs()
+        handle_inputs(inputs)
+
 if __name__ == "__main__":
-    aes = AES_CTR()
-    aes.convert_key_256()
-    aes.show_key_hex()
-    aes.write_key()
-    aes.create_init_vector()
-    aes.write_init_vector()
+    main()
 
 
     
