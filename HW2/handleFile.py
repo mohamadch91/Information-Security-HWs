@@ -84,12 +84,10 @@ def write_key(key: str) -> None:
     Args:
         key (str): key to be written to text file
     """
-    try:
-        with open('key.txt', 'w') as f:
+    with open('SHA256key.txt', 'wb') as f:
             f.write(key)
-        return True
-    except:
-        return False
+    return True
+ 
 
 def write_init_vector(init_vector: str) -> None:
     """Write initial vector to text file
