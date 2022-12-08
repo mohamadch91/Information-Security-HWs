@@ -36,10 +36,6 @@ class AES_CTR:
             key (str): key for AES encryption
         """
         self.key = key
-    def read_key(self) -> None:
-        """Read key file from text file
-        """
-        self.key= read_key()
     def write_key(self) -> None:
         """Write key to text file
         """
@@ -58,6 +54,12 @@ class AES_CTR:
             print("Initial vector written to file")
         else:
             print("Error writing initial vector to file")
+    def set_init_vector(self, init_vector: str) -> None:
+        """Set the initial vector for AES encryption
+        Args:
+            init_vector (str): initial vector for AES encryption
+        """
+        self.initial_vector = init_vector
 if __name__ == "__main__":
     aes = AES_CTR()
     aes.read_key()
