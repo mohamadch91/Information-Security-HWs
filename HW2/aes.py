@@ -15,8 +15,7 @@ class bcolors:
     WARNING = '\033[93m'
     FAIL = '\033[91m'
     ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+
 def styled_print(color: str,text: str) -> None:
     print(color+"================================="+bcolors.ENDC)
     print(color+text+bcolors.ENDC)
@@ -29,7 +28,7 @@ class AES_CTR:
         init_vector: initial vector for AES encryption
     """
     key: str = read_key()
-    initial_vector :  list = field(default_factory=list) 
+    initial_vector :  str = "" 
     def create_salt(self) -> bytes:
         """Create a random salt for the key
         Returns:
@@ -46,12 +45,6 @@ class AES_CTR:
         """Show the key in hex
         """
         styled_print(bcolors.OKGREEN,f'Algorithm key is : {binascii.hexlify(self.key)}')
-    def set_key(self, key: str) -> None:
-        """Set the key for AES encryption
-        Args:
-            key (str): key for AES encryption
-        """
-        self.key = key
     def write_key(self) -> None:
         """Write key to text file
         """
@@ -70,12 +63,6 @@ class AES_CTR:
             styled_print(bcolors.OKGREEN,"Initial vector written to file")
         else:
             styled_print(bcolors.FAIL,"Error writing initial vector to file")
-    def set_init_vector(self, init_vector: str) -> None:
-        """Set the initial vector for AES encryption
-        Args:
-            init_vector (str): initial vector for AES encryption
-        """
-        self.initial_vector = init_vector
     def read_256_key(self) -> None:
         """Read key from text file
         """
