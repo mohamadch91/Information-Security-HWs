@@ -208,6 +208,7 @@ def handle_inputs(inputs: list) -> None:
             if(new_choice == "y"):
                 copy_256_key()
                 copy_init_vector()
+                styled_print(bcolors.OKGREEN,"Key and initial vector copied to new file")
             encrypt = Encrypt()
             encrypt.encrypt_file()
         else:
