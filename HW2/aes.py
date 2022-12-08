@@ -2,7 +2,8 @@ from typing import List
 from dataclasses import dataclass
 from os import urandom
 from .handleFile import *
-
+import pbkdf2
+import binascii
 @dataclass
 class AES_CTR:
     """AES_CTR class for encrypting and decrypting files using AES in counter mode
@@ -18,13 +19,20 @@ class AES_CTR:
         Returns:
             random salt
         """
-        return urandom(16)
+        return urandom(8)
 
     def convert_key_256 (self ) -> None:
         """Convert the key to 256 bits
         """
-        self.key = self.key + self.create_salt()
-        
+        salt : bytes = self.create_salt()
+        self.key = pbkdf2.PBKDF2(self.key, salt).read(32)
+    def show_key_hex(self) -> None:
+        """Show the key in hex
+        """
+        print(binascii.hexlify(self.key))
+    
+
+
 
 
     
