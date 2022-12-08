@@ -98,9 +98,41 @@ def write_init_vector(init_vector: str) -> None:
     Args:
         init_vector (str): initial vector to be written to text file
     """
-    # try:
-    with open('init_vector.txt', 'w') as f:
-        f.write(str(init_vector))
-    return True
-    # except:
-    #     return False
+    try:
+        with open('init_vector.txt', 'w') as f:
+            f.write(str(init_vector))
+        return True
+    except:
+        return False
+def read_init_vector() -> str:
+    """Read initial vector from text file
+
+    Returns:
+        string: initial vector to be used for decryption
+    """
+    try:
+        with open('init_vector.txt', 'r') as f:
+            init_vector: str = f.read()
+            if(init_vector == ''):
+                print("init_vector file is empty")
+                exit()
+        return int(init_vector)
+    except FileNotFoundError:
+        print("init_vector file not found")
+        exit()
+def read_256_key() -> bytes:
+    """Read 256 bit key from text file
+
+    Returns:
+        string: 256 bit key to be used for decryption
+    """
+    try:
+        with open('SHA256key.txt', 'rb') as f:
+            key: str = f.read()
+            if(key == ''):
+                print("key file is empty")
+                exit()
+        return key
+    except FileNotFoundError:
+        print("key file not found")
+        exit()
