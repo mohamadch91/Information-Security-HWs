@@ -49,3 +49,31 @@ def read_input() -> str:
     except FileNotFoundError:
         print("Input file not found")
         exit()
+
+#Write encrypted to text file
+def write_encrypted(encrypted: str) -> bool:
+    """Write encrypted to text file
+
+    Args:
+        encrypted (str): encrypted text
+    """
+    try:
+        with open('Cipher.txt', 'w') as f:
+            f.write(encrypted)
+        return True
+    except:
+        return False
+
+#Write decrypted to text file
+def write_decrypted(decrypted: str) -> None:
+    """Write decrypted to text file
+
+    Args:
+        decrypted (str): decrypted text
+    """
+    try:
+        with open('Decrypted.txt', 'w') as f:
+            f.write(decrypted)
+        return True
+    except:
+        return False
