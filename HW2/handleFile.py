@@ -1,4 +1,21 @@
 #Read key file from text file
+class bcolors:
+    FAIL = '\033[91m'
+    HEADER = '\033[95m'
+
+    ENDC = '\033[0m'
+
+def styled_print(color: str,text: str) -> None:
+    print(bcolors.HEADER+"================================="+bcolors.ENDC)
+
+    print(bcolors.HEADER+"AES-CTR Encryption and Decryption"+bcolors.ENDC)
+    print(bcolors.HEADER+"================================="+bcolors.ENDC)
+    print()
+    print(color+"================================="+bcolors.ENDC)
+    print(color+text+bcolors.ENDC)
+    print(color+"================================="+bcolors.ENDC)  
+
+
 def read_key() -> str:
     """Read key file from text file
     Returns:
@@ -8,12 +25,12 @@ def read_key() -> str:
         with open('key.txt', 'r') as f:
             key :str = f.read()
             if(key == ''):
-                print("Key file is empty")
+                styled_print(bcolors.FAIL,"Key file is empty")
                 exit()
             return key
 
     except FileNotFoundError:
-        print("Key file not found")
+        styled_print(bcolors.FAIL,"Key file not found")
         exit()
 #Read cipher file from text file
 def read_cipher() -> str:
@@ -25,12 +42,12 @@ def read_cipher() -> str:
         with open('EncryptedCipher.txt', 'rb') as f:
             cipher: str = f.read()
             if(cipher == ''):
-                print("cipher file is empty")
+                styled_print(bcolors.FAIL,"cipher file is empty")
                 exit()
         return cipher
         
     except FileNotFoundError:
-        print("Cipher file not found")
+        styled_print(bcolors.FAIL,"Cipher file not found")
         exit()
 #Read input file from text file
 def read_input() -> str:
@@ -43,11 +60,11 @@ def read_input() -> str:
         with open('plain_input.txt', 'r') as f:
             input :str = f.read()
             if(input == ''):
-                print("Input file is empty")
+                styled_print(bcolors.FAIL,"Input file is empty")
                 exit()
         return input
     except FileNotFoundError:
-        print("Input file not found")
+        styled_print(bcolors.FAIL,"Input file not found")
         exit()
 
 #Write encrypted to text file
@@ -115,11 +132,11 @@ def read_init_vector() -> str:
         with open('init_vector.txt', 'r') as f:
             init_vector: str = f.read()
             if(init_vector == ''):
-                print("init_vector file is empty")
+                styled_print(bcolors.FAIL,"init_vector file is empty")
                 exit()
         return int(init_vector)
     except FileNotFoundError:
-        print("init_vector file not found")
+        styled_print(bcolors.FAIL,"init_vector file not found")
         exit()
 def read_256_key() -> bytes:
     """Read 256 bit key from text file
@@ -131,11 +148,11 @@ def read_256_key() -> bytes:
         with open('SHA256key.txt', 'rb') as f:
             key: str = f.read()
             if(key == ''):
-                print("key file is empty")
+                styled_print(bcolors.FAIL,"key file is empty")
                 exit()
         return key
     except FileNotFoundError:
-        print("key file not found")
+        styled_print(bcolors.FAIL,"key file not found")
         exit()
 
 def copy_256_key() -> None:
@@ -145,12 +162,12 @@ def copy_256_key() -> None:
         with open('SHA256key.txt', 'rb') as f:
             key: str = f.read()
             if(key == ''):
-                print("key file is empty")
+                styled_print(bcolors.FAIL,"key file is empty")
                 exit()
         with open('SHA256key_copy.txt', 'wb') as f:
             f.write(key)
     except FileNotFoundError:
-        print("key file not found")
+        styled_print(bcolors.FAIL,"key file not found")
         exit()
 def copy_init_vector() -> None:
     """Copy initial vector to init_vector.txt
@@ -159,10 +176,10 @@ def copy_init_vector() -> None:
         with open('init_vector.txt', 'r') as f:
             init_vector: str = f.read()
             if(init_vector == ''):
-                print("init_vector file is empty")
+                styled_print(bcolors.FAIL,"init_vector file is empty")
                 exit()
         with open('init_vector_copy.txt', 'w') as f:
             f.write(init_vector)
     except FileNotFoundError:
-        print("init_vector file not found")
+        styled_print(bcolors.FAIL,"init_vector file not found")
         exit()
