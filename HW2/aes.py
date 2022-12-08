@@ -105,19 +105,19 @@ class Encrypt(AES_CTR):
             encrypted string
         """
         return self.aes.encrypt(self.plaintext)
-    def write_cipher(self, cipher: str) -> None:
+    def write_cipher(self, cipher: bytes) -> None:
         """Write cipher to text file
         Args:
-            cipher (str): encrypted string
+            cipher (bytes): encrypted string
         """
         if(write_encrypted(cipher)):
             print("Cipher written to file")
         else:
             print("Error writing cipher to file")
-    def show_cipher_hex(self, cipher: str) -> None:
+    def show_cipher_hex(self, cipher: bytes) -> None:
         """Show the cipher in hex
         Args:
-            cipher (str): encrypted string
+            cipher (bytes): encrypted string
         """
         print(f'Encrypted cipher is : {binascii.hexlify(cipher)}')
     def encrypt_file(self) -> None:
@@ -169,6 +169,33 @@ class Decrypt(AES_CTR):
         decrypted = self.decrypt()
         self.show_decrypted_hex(decrypted)
         self.write_decrypted(decrypted)
+    
+def get_inputs() -> list:
+    print("1. Encrypt : ")
+    print("2. Decrypt : ")
+    print("3. Exit : ")
+    inputs = input("Enter your choice : ")
+    return inputs
+
+def handle_inputs(inputs: list) -> None:
+    if(inputs == "1"):
+        print("Are you sure you want to encrypt the file after encrypt keys are resseted? (y/n)")
+        choice = input("Enter your choice : ")
+        if(choice == "y"):
+            print('Do you want to copy the key and initial vector to new file? (y/n)')
+            new_choice = input("Enter your choice : ")
+            if(new_choice == "y"):
+                
+
+        encrypt = Encrypt()
+        encrypt.encrypt_file()
+    elif(inputs == "2"):
+        decrypt = Decrypt()
+        decrypt.decrypt_file()
+    elif(inputs == "3"):
+        exit()
+    else:
+        print("Invalid choice")
     
 if __name__ == "__main__":
     aes = AES_CTR()

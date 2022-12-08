@@ -22,7 +22,7 @@ def read_cipher() -> str:
         string: cipher text to be decrypted
     """
     try:
-        with open('cipher.txt', 'r') as f:
+        with open('cipher.txt', 'rb') as f:
             cipher: str = f.read()
             if(cipher == ''):
                 print("cipher file is empty")
@@ -58,7 +58,7 @@ def write_encrypted(encrypted: str) -> bool:
         encrypted (str): encrypted text
     """
     try:
-        with open('EncryptedCipher.txt', 'w') as f:
+        with open('EncryptedCipher.txt', 'wb') as f:
             f.write(encrypted)
         return True
     except:
@@ -135,4 +135,33 @@ def read_256_key() -> bytes:
         return key
     except FileNotFoundError:
         print("key file not found")
+        exit()
+
+def copy_256_key() -> None:
+    """Copy 256 bit key to key.txt
+    """
+    try:
+        with open('SHA256key.txt', 'rb') as f:
+            key: str = f.read()
+            if(key == ''):
+                print("key file is empty")
+                exit()
+        with open('SHA256key_copy.txt', 'wb') as f:
+            f.write(key)
+    except FileNotFoundError:
+        print("key file not found")
+        exit()
+def copy_init_vector() -> None:
+    """Copy initial vector to init_vector.txt
+    """
+    try:
+        with open('init_vector.txt', 'r') as f:
+            init_vector: str = f.read()
+            if(init_vector == ''):
+                print("init_vector file is empty")
+                exit()
+        with open('init_vector_copy.txt', 'w') as f:
+            f.write(init_vector)
+    except FileNotFoundError:
+        print("init_vector file not found")
         exit()
