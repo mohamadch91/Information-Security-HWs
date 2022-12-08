@@ -51,6 +51,13 @@ class AES_CTR:
         """Create a random initial vector for AES encryption
         """
         self.initial_vector = secrets.randbits(256)
+    def write_init_vector(self) -> None:
+        """Write initial vector to text file
+        """
+        if(write_init_vector(self.initial_vector)):
+            print("Initial vector written to file")
+        else:
+            print("Error writing initial vector to file")
 if __name__ == "__main__":
     aes = AES_CTR()
     aes.read_key()
