@@ -17,6 +17,10 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+def styled_print(color: str,text: str) -> None:
+    print(color+"================================="+bcolors.ENDC)
+    print(color+text+bcolors.ENDC)
+    print(color+"================================="+bcolors.ENDC)  
 @dataclass
 class AES_CTR:
     """AES_CTR class for encrypting and decrypting files using AES in counter mode
@@ -41,7 +45,7 @@ class AES_CTR:
     def show_key_hex(self) -> None:
         """Show the key in hex
         """
-        print(f'Algorithm key is : {binascii.hexlify(self.key)}')
+        styled_print(bcolors.OKGREEN,f'Algorithm key is : {binascii.hexlify(self.key)}')
     def set_key(self, key: str) -> None:
         """Set the key for AES encryption
         Args:
@@ -52,9 +56,9 @@ class AES_CTR:
         """Write key to text file
         """
         if(write_key(self.key)):
-            print("Key written to file")
+            styled_print(bcolors.OKGREEN,"Key written to file")
         else:
-            print("Error writing key to file")
+            styled_print(bcolors.FAIL,"Error writing key to file")
     def create_init_vector(self) -> None:
         """Create a random initial vector for AES encryption
         """
@@ -63,9 +67,9 @@ class AES_CTR:
         """Write initial vector to text file
         """
         if(write_init_vector(self.initial_vector)):
-            print("Initial vector written to file")
+            styled_print(bcolors.OKGREEN,"Initial vector written to file")
         else:
-            print("Error writing initial vector to file")
+            styled_print(bcolors.FAIL,"Error writing initial vector to file")
     def set_init_vector(self, init_vector: str) -> None:
         """Set the initial vector for AES encryption
         Args:
@@ -122,9 +126,9 @@ class Encrypt(AES_CTR):
             cipher (bytes): encrypted string
         """
         if(write_encrypted(cipher)):
-            print("Cipher written to file")
+            styled_print(bcolors.OKGREEN,"Cipher written to file")
         else:
-            print("Error writing cipher to file")
+            styled_print(bcolors.FAIL,"Error writing cipher to file")
     def show_cipher_hex(self, cipher: bytes) -> None:
         """Show the cipher in hex
         Args:
@@ -165,15 +169,15 @@ class Decrypt(AES_CTR):
             decrypted (str): decrypted string
         """
         if(write_decrypted(decrypted)):
-            print("Decrypted written to file")
+            styled_print(bcolors.OKGREEN,"Decrypted written to file")
         else:
-            print("Error writing decrypted to file")
+            styled_print(bcolors.FAIL,"Error writing decrypted to file")
     def show_decrypted_hex(self, decrypted: str) -> None:
         """Show the decrypted in hex
         Args:
             decrypted (str): decrypted string
         """
-        print(f'Decrypted cipher is : {binascii.hexlify(decrypted)}')
+        print(f'Decrypted cipher is : {decrypted}')
     def decrypt_file(self) -> None:
         """Decrypt the file
         """
@@ -181,27 +185,25 @@ class Decrypt(AES_CTR):
         self.show_decrypted_hex(decrypted)
         self.write_decrypted(decrypted)
 
-
+ 
 def print_title() -> None:
-    print("AES-CTR Encryption and Decryption")
-    print("=================================")
-def stlyled_print(text: str) -> None:
-    print("=================================")
-    print(text)
-    print("=================================")    
+    styled_print(bcolors.HEADER,"AES-CTR Encryption and Decryption")
+ 
 def get_inputs() -> list:
-    stlyled_print("1. Encrypt : ")
-    stlyled_print("2. Decrypt : ")
-    stlyled_print("3. Exit : ")
+    print_title()
+    styled_print(bcolors.OKBLUE,"1. Encrypt : ")
+    styled_print(bcolors.OKBLUE,"2. Decrypt : ")
+    styled_print(bcolors.OKBLUE,"3. Exit : ")
     inputs = input("Enter your choice : ")
     return inputs
 
 def handle_inputs(inputs: list) -> None:
+
     if(inputs == "1"):
-        stlyled_print("Are you sure you want to encrypt the file after encrypt keys are resseted? (y/n)")
+        styled_print(bcolors.WARNING,"Are you sure you want to encrypt the file after encrypt keys are resseted? (y/n)")
         choice = input("Enter your choice : ")
         if(choice == "y"):
-            stlyled_print('Do you want to copy the key and initial vector to new file? (y/n)')
+            styled_print(bcolors.WARNING,'Do you want to copy the key and initial vector to new file? (y/n)')
             new_choice = input("Enter your choice : ")
             if(new_choice == "y"):
                 copy_256_key()
@@ -209,17 +211,17 @@ def handle_inputs(inputs: list) -> None:
             encrypt = Encrypt()
             encrypt.encrypt_file()
         else:
-            print("Exiting")
+            print(bcolors.OKCYAN,"Exiting")
             exit()
         
     elif(inputs == "2"):
         decrypt = Decrypt()
         decrypt.decrypt_file()
     elif(inputs == "3"):
-        stlyled_print("Exiting")
+        styled_print(bcolors.OKCYAN,"Exiting")
         exit()
     else:
-        stlyled_print("Invalid choice")
+        styled_print(bcolors.FAIL,"Invalid choice")
     
 def main() -> None:
     while(True):
