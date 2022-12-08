@@ -169,20 +169,28 @@ class Decrypt(AES_CTR):
         decrypted = self.decrypt()
         self.show_decrypted_hex(decrypted)
         self.write_decrypted(decrypted)
-    
+
+
+def print_title() -> None:
+    print("AES-CTR Encryption and Decryption")
+    print("=================================")
+def stlyled_print(text: str) -> None:
+    print("=================================")
+    print(text)
+    print("=================================")    
 def get_inputs() -> list:
-    print("1. Encrypt : ")
-    print("2. Decrypt : ")
-    print("3. Exit : ")
+    stlyled_print("1. Encrypt : ")
+    stlyled_print("2. Decrypt : ")
+    stlyled_print("3. Exit : ")
     inputs = input("Enter your choice : ")
     return inputs
 
 def handle_inputs(inputs: list) -> None:
     if(inputs == "1"):
-        print("Are you sure you want to encrypt the file after encrypt keys are resseted? (y/n)")
+        stlyled_print("Are you sure you want to encrypt the file after encrypt keys are resseted? (y/n)")
         choice = input("Enter your choice : ")
         if(choice == "y"):
-            print('Do you want to copy the key and initial vector to new file? (y/n)')
+            stlyled_print('Do you want to copy the key and initial vector to new file? (y/n)')
             new_choice = input("Enter your choice : ")
             if(new_choice == "y"):
                 copy_256_key()
@@ -197,10 +205,10 @@ def handle_inputs(inputs: list) -> None:
         decrypt = Decrypt()
         decrypt.decrypt_file()
     elif(inputs == "3"):
-        print("Exiting")
+        stlyled_print("Exiting")
         exit()
     else:
-        print("Invalid choice")
+        stlyled_print("Invalid choice")
     
 def main() -> None:
     while(True):
