@@ -97,9 +97,79 @@ class Encrypt(AES_CTR):
         """
         super().__init__()
         super().encrypt_initalize()
-
-        self.aes = pyaes.AESModeOfOperationCTR(self.key, pyaes.Counter(self.initial_vector))
-
+        self.aes :object = pyaes.AESModeOfOperationCTR(self.key, pyaes.Counter(self.initial_vector))
+        self.plaintext : str = read_input()
+    def encrypt(self) -> str:
+        """Encrypt the plaintext
+        Returns:
+            encrypted string
+        """
+        return self.aes.encrypt(self.plaintext)
+    def write_cipher(self, cipher: str) -> None:
+        """Write cipher to text file
+        Args:
+            cipher (str): encrypted string
+        """
+        if(write_encrypted(cipher)):
+            print("Cipher written to file")
+        else:
+            print("Error writing cipher to file")
+    def show_cipher_hex(self, cipher: str) -> None:
+        """Show the cipher in hex
+        Args:
+            cipher (str): encrypted string
+        """
+        print(f'Encrypted cipher is : {binascii.hexlify(cipher)}')
+    def encrypt_file(self) -> None:
+        """Encrypt the file
+        """
+        cipher = self.encrypt()
+        self.show_cipher_hex(cipher)
+        self.write_cipher(cipher)
+    
+class Decrypt(AES_CTR):
+    """Decrypt class for decrypt
+    Attributes:
+        key: key for AES decryption
+        init_vector: initial vector for AES decryption
+        ciphertext: ciphertext for AES decryption
+        aes: pyaes object for AES decryption
+    """
+    def __init__(self) -> None:
+        """Initialize Decrypt class
+        """
+        super().__init__()
+        super().decrypt_initalize()
+        self.aes : object = pyaes.AESModeOfOperationCTR(self.key, pyaes.Counter(self.initial_vector))
+        self.ciphertext : str = read_cipher()
+    def decrypt(self) -> str:
+        """Decrypt the ciphertext
+        Returns:
+            decrypted string
+        """
+        return self.aes.decrypt(self.ciphertext)
+    def write_decrypted(self, decrypted: str) -> None:
+        """Write decrypted to text file
+        Args:
+            decrypted (str): decrypted string
+        """
+        if(write_decrypted(decrypted)):
+            print("Decrypted written to file")
+        else:
+            print("Error writing decrypted to file")
+    def show_decrypted_hex(self, decrypted: str) -> None:
+        """Show the decrypted in hex
+        Args:
+            decrypted (str): decrypted string
+        """
+        print(f'Decrypted cipher is : {binascii.hexlify(decrypted)}')
+    def decrypt_file(self) -> None:
+        """Decrypt the file
+        """
+        decrypted = self.decrypt()
+        self.show_decrypted_hex(decrypted)
+        self.write_decrypted(decrypted)
+    
 if __name__ == "__main__":
     aes = AES_CTR()
     aes.convert_key_256()
