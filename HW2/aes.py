@@ -5,6 +5,7 @@ from handleFile import *
 import pbkdf2
 import binascii
 import secrets
+import pyaes
 @dataclass
 class AES_CTR:
     """AES_CTR class for encrypting and decrypting files using AES in counter mode
@@ -60,6 +61,30 @@ class AES_CTR:
             init_vector (str): initial vector for AES encryption
         """
         self.initial_vector = init_vector
+    def read_key(self) -> None:
+        """Read key from text file
+        """
+        self.key = read_256_key()
+    def read_init_vector(self) -> None:
+        """Read initial vector from text file
+        """
+        self.initial_vector = read_init_vector()
+
+class Encrypt(AES_CTR):
+    """Encrypt class for encrypt
+    Attributes:
+        key: key for AES encryption
+        init_vector: initial vector for AES encryption
+        plaintext: plaintext for AES encryption
+        aes: pyaes object for AES encryption
+    """
+    def __init__(self) -> None:
+        """Initialize Encrypt class
+        """
+        super().__init__()
+        super
+
+        self.aes = pyaes.AESModeOfOperationCTR(self.key, pyaes.Counter(self.initial_vector))
 
 if __name__ == "__main__":
     aes = AES_CTR()
