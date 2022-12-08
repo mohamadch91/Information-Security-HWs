@@ -134,7 +134,7 @@ class Encrypt(AES_CTR):
         Args:
             cipher (bytes): encrypted string
         """
-        print(f'Encrypted cipher is : {binascii.hexlify(cipher)}')
+        styled_print(bcolors.OKGREEN,f'Encrypted cipher is : {binascii.hexlify(cipher)}')
     def encrypt_file(self) -> None:
         """Encrypt the file
         """
@@ -177,7 +177,7 @@ class Decrypt(AES_CTR):
         Args:
             decrypted (str): decrypted string
         """
-        print(f'Decrypted cipher is : {decrypted}')
+        styled_print(bcolors.OKGREEN,f'Decrypted cipher is : {decrypted}')
     def decrypt_file(self) -> None:
         """Decrypt the file
         """
@@ -230,6 +230,7 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    
 
 
     

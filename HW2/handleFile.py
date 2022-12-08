@@ -22,7 +22,7 @@ def read_cipher() -> str:
         string: cipher text to be decrypted
     """
     try:
-        with open('cipher_input.txt', 'rb') as f:
+        with open('EncryptedCipher.txt', 'rb') as f:
             cipher: str = f.read()
             if(cipher == ''):
                 print("cipher file is empty")
