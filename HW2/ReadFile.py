@@ -7,6 +7,9 @@ def read_key() -> str:
     try:
         with open('key.txt', 'r') as f:
             key :str = f.read()
+            if(key == ''):
+                print("Key file is empty")
+                exit()
             return key
 
     except FileNotFoundError:
@@ -21,6 +24,9 @@ def read_cipher() -> str:
     try:
         with open('Cipher.txt', 'r') as f:
             cipher: str = f.read()
+            if(cipher == ''):
+                print("Cipher file is empty")
+                exit()
         return cipher
         
     except FileNotFoundError:
@@ -36,6 +42,9 @@ def read_input() -> str:
     try: 
         with open('input.txt', 'r') as f:
             input :str = f.read()
+            if(input == ''):
+                print("Input file is empty")
+                exit()
         return input
     except FileNotFoundError:
         print("Input file not found")
