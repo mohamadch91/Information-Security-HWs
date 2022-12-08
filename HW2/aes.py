@@ -60,12 +60,14 @@ class AES_CTR:
             init_vector (str): initial vector for AES encryption
         """
         self.initial_vector = init_vector
+
 if __name__ == "__main__":
     aes = AES_CTR()
-    aes.read_key()
     aes.convert_key_256()
     aes.show_key_hex()
     aes.write_key()
+    aes.create_init_vector()
+    aes.write_init_vector()
 
 
     

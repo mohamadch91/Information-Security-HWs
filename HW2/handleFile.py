@@ -79,15 +79,18 @@ def write_decrypted(decrypted: str) -> None:
         return False
 
 def write_key(key: str) -> None:
-    """Write 256-bit key to text file
+    """Write key to text file
 
     Args:
         key (str): key to be written to text file
     """
-    with open('SHA256key.txt', 'wb') as f:
+    try:
+        with open('SHA256key.txt', 'wb') as f:
             f.write(key)
-    return True
- 
+        return True
+    except :
+        
+        return False
 
 def write_init_vector(init_vector: str) -> None:
     """Write initial vector to text file
@@ -95,9 +98,9 @@ def write_init_vector(init_vector: str) -> None:
     Args:
         init_vector (str): initial vector to be written to text file
     """
-    try:
-        with open('init_vector.txt', 'w') as f:
-            f.write(init_vector)
-        return True
-    except:
-        return False
+    # try:
+    with open('init_vector.txt', 'w') as f:
+        f.write(str(init_vector))
+    return True
+    # except:
+    #     return False
