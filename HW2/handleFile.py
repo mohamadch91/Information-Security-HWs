@@ -79,7 +79,7 @@ def write_decrypted(decrypted: str) -> None:
         return False
 
 def write_key(key: str) -> None:
-    """Write key to text file
+    """Write 256-bit key to text file
 
     Args:
         key (str): key to be written to text file

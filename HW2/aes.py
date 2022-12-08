@@ -4,6 +4,7 @@ from os import urandom
 from handleFile import *
 import pbkdf2
 import binascii
+import secrets
 @dataclass
 class AES_CTR:
     """AES_CTR class for encrypting and decrypting files using AES in counter mode
@@ -18,7 +19,7 @@ class AES_CTR:
         Returns:
             random salt
         """
-        return urandom(8)
+        return urandom(16)
 
     def convert_key_256 (self ) -> None:
         """Convert the key to 256 bits
@@ -46,7 +47,10 @@ class AES_CTR:
             print("Key written to file")
         else:
             print("Error writing key to file")
-
+    def create_init_vector(self) -> None:
+        """Create a random initial vector for AES encryption
+        """
+        self.initial_vector = secrets.randbits(256)
 if __name__ == "__main__":
     aes = AES_CTR()
     aes.read_key()
