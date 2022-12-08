@@ -61,7 +61,7 @@ class AES_CTR:
             init_vector (str): initial vector for AES encryption
         """
         self.initial_vector = init_vector
-    def read_key(self) -> None:
+    def read_256_key(self) -> None:
         """Read key from text file
         """
         self.key = read_256_key()
@@ -69,6 +69,20 @@ class AES_CTR:
         """Read initial vector from text file
         """
         self.initial_vector = read_init_vector()
+    def encrypt_initalize(self) -> None:
+        """Initialize the encryption
+        """
+        self.convert_key_256()
+        self.show_key_hex()
+        self.write_key()
+        self.create_init_vector()
+        self.write_init_vector()
+    def decrypt_initalize(self) -> None:
+        """Initialize the decryption
+        """
+        self.read_256_key()
+        self.show_key_hex()
+        self.read_init_vector()
 
 class Encrypt(AES_CTR):
     """Encrypt class for encrypt
@@ -82,7 +96,7 @@ class Encrypt(AES_CTR):
         """Initialize Encrypt class
         """
         super().__init__()
-        super
+        super().encrypt_initalize()
 
         self.aes = pyaes.AESModeOfOperationCTR(self.key, pyaes.Counter(self.initial_vector))
 
