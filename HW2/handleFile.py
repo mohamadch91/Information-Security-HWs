@@ -77,3 +77,29 @@ def write_decrypted(decrypted: str) -> None:
         return True
     except:
         return False
+
+def write_key(key: str) -> None:
+    """Write key to text file
+
+    Args:
+        key (str): key to be written to text file
+    """
+    try:
+        with open('key.txt', 'w') as f:
+            f.write(key)
+        return True
+    except:
+        return False
+
+def write_init_vector(init_vector: str) -> None:
+    """Write initial vector to text file
+
+    Args:
+        init_vector (str): initial vector to be written to text file
+    """
+    try:
+        with open('init_vector.txt', 'w') as f:
+            f.write(init_vector)
+        return True
+    except:
+        return False

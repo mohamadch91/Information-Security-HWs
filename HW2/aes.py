@@ -12,8 +12,7 @@ class AES_CTR:
         init_vector: initial vector for AES encryption
     """
     key: str = read_key()
-    initial_vector :  list = field(default_factory=list)
-
+    initial_vector :  list = field(default_factory=list) 
     def create_salt(self) -> bytes:
         """Create a random salt for the key
         Returns:
@@ -30,12 +29,30 @@ class AES_CTR:
         """Show the key in hex
         """
         print(f'Algorithm key is : {binascii.hexlify(self.key)}')
-
+    def set_key(self, key: str) -> None:
+        """Set the key for AES encryption
+        Args:
+            key (str): key for AES encryption
+        """
+        self.key = key
+    def read_key(self) -> None:
+        """Read key file from text file
+        """
+        self.key= read_key()
+    def write_key(self) -> None:
+        """Write key to text file
+        """
+        if(write_key(self.key)):
+            print("Key written to file")
+        else:
+            print("Error writing key to file")
 
 if __name__ == "__main__":
     aes = AES_CTR()
+    aes.read_key()
     aes.convert_key_256()
     aes.show_key_hex()
+    aes.write_key()
 
 
     
