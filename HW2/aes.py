@@ -1,7 +1,7 @@
 from typing import List
-from dataclasses import dataclass
+from dataclasses import dataclass,field
 from os import urandom
-from .handleFile import *
+from handleFile import *
 import pbkdf2
 import binascii
 @dataclass
@@ -12,7 +12,7 @@ class AES_CTR:
         init_vector: initial vector for AES encryption
     """
     key: str = read_key()
-    initial_vector : List[int] = [0] * 16
+    initial_vector :  list = field(default_factory=list)
 
     def create_salt(self) -> bytes:
         """Create a random salt for the key
@@ -29,10 +29,13 @@ class AES_CTR:
     def show_key_hex(self) -> None:
         """Show the key in hex
         """
-        print(binascii.hexlify(self.key))
-    
+        print(f'Algorithm key is : {binascii.hexlify(self.key)}')
 
 
+if __name__ == "__main__":
+    aes = AES_CTR()
+    aes.convert_key_256()
+    aes.show_key_hex()
 
 
     
