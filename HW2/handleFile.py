@@ -22,10 +22,10 @@ def read_cipher() -> str:
         string: cipher text to be decrypted
     """
     try:
-        with open('Cipher.txt', 'r') as f:
+        with open('cipher.txt', 'r') as f:
             cipher: str = f.read()
             if(cipher == ''):
-                print("Cipher file is empty")
+                print("cipher file is empty")
                 exit()
         return cipher
         
@@ -58,7 +58,7 @@ def write_encrypted(encrypted: str) -> bool:
         encrypted (str): encrypted text
     """
     try:
-        with open('Cipher.txt', 'w') as f:
+        with open('EncryptedCipher.txt', 'w') as f:
             f.write(encrypted)
         return True
     except:
@@ -72,7 +72,7 @@ def write_decrypted(decrypted: str) -> None:
         decrypted (str): decrypted text
     """
     try:
-        with open('Decrypted.txt', 'w') as f:
+        with open('DecryptedInput.txt', 'w') as f:
             f.write(decrypted)
         return True
     except:
