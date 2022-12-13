@@ -20,12 +20,31 @@ Use AES-CTR to encrypt and decrypt messages.
 pip3 install -r requirements.txt
 ```
 
-
 ## Usage
 
 ```bash
-python3 ping.py
+python3 eas.py
 ```
+
+## Code
+
+[Code](./eas.py)
+
+### Encrypt
+
+read the message from the [plain text](./plain_input.txt) file and encrypt it and write the result to the [cipher text](./EncryptedCiphertxt) file.
+write the key and the nonce to the [key](./key.txt) file.
+<br/>
+
+also write SHA-256 key to the [key](./SHA256key.txt)
+and initialize vector to the [init](./init_vector.txt) file. 
+
+### Decrypt
+
+read cipher text from the [cipher text](./EncryptedCiphertxt) file and decrypt it and write the result to the [plain text](./DecryptedInput.txt) file.
+
+read the key and the nonce from the [key](./SHA256key.txt) file.
+
 
 ## Report
 
