@@ -1,0 +1,4 @@
+python-secrets==22.6.1
+pyaes==1.6.1
+pbkdf2==1.3
+
