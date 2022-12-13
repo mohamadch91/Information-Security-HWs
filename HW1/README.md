@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a simple pthon script that can be used to ping a host and check if it is alive or not.
+This is a simple python script that can be used to ping a host and check if it is alive or not.
 and find open ports on a host.
 
 
