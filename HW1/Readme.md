@@ -1,10 +1,17 @@
-# AUT information security course HomeWorks
+# AUT information security course HomeWorke 1
 
-## Homework 1
+## Description
 
-please see [Homework 1](./HW1/README.md)
+This is a simple pthon script that can be used to ping a host and check if it is alive or not.
+and find open ports on a host.
 
 
-## Homework 2
+## Usage
 
-please see [Homework 2](./HW2/README.md)
+```bash
+python3 ping.py
+```
+
+## Report
+
+[Report](./HW1_9831125_MohamadChoupan.pdf)
