@@ -72,8 +72,6 @@ def send_command(connection : connection, command :str) -> None:
     Returns:
         None
     """
-    print("sending commanddasdasda: "+command)
-    print(command)
     connection.send(command.encode())
 def json_convert (data: dict) -> json:
     """convert data to json
