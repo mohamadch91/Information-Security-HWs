@@ -97,7 +97,6 @@ if __name__== '__main__':
         connection,address=accept_client(server)        
         # print_lock.acquire()
         start_new_thread(accpet_client_data, (connection,))
-    connection.close()    
         
         
-
+    
