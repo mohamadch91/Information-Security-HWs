@@ -46,16 +46,38 @@ def recv_data(connection: connection) -> json:
 
 
 #accept client connection
-def accept_client(s):
+def accept_client(s :socket) -> connection:
+    """accept client connection
+
+    Args:
+        s (Socket): Socket object to accept client connection
+
+    Returns:
+        Coonection,address: Socket connection between client and server, client ip and port
+    """
     connection, address = s.accept()
     print('Connection from: ' + str(address))
    
     return connection,address
 #read json
-def json_parser(datas):
-    return json.loads(datas)
+def json_parser(data : json) -> dict:
+    """parse json data
+    Args:
+        data (json): json data to parse
+    Returns:
+        dict: parsed data
 
-def accpet_client_data(connection):
+    """
+    return json.loads(data)
+
+def accpet_client_data(connection : connection) -> None:
+    """accept client data
+    Args:
+        connection (connection): Socket connection between client and server
+    
+    Returns:
+        None
+    """
     while True:
         try:
             data = recv_data(connection)
