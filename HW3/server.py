@@ -26,7 +26,7 @@ def create_server(ip :str, port :str) ->socket :
 # send data to client
 
 # receive data from client
-def recive_data(connection: connection) -> json:
+def recieve_data(connection: connection) -> json:
     """function to recieve data from client
 
     Args:
@@ -72,6 +72,8 @@ def send_command(connection : connection, command :str) -> None:
     Returns:
         None
     """
+    print("sending commanddasdasda: "+command)
+    print(command)
     connection.send(command.encode())
 def json_convert (data: dict) -> json:
     """convert data to json
@@ -110,9 +112,12 @@ def accpet_client_data(connection : connection) -> None:
     """
     while True:
         try:
-            input_data=input("Enter command: ")
+            command=input("Enter command: ")
+            input_data={}
+            input_data["command"]=command
+            input_data=json_convert(input_data)
             send_command(connection,input_data)
-            data = recive_data(connection)
+            data = recieve_data(connection)
             data = json_parser(data)
             print_data(data)
             
@@ -124,7 +129,7 @@ def accpet_client_data(connection : connection) -> None:
 #main
 if __name__== '__main__':
     print("server started at port 45678")
-    server=create_server('0.0.0.0',45678)
+    server=create_server('0.0.0.0',45679)
     
     while True:
         connection,address=accept_client(server)        
