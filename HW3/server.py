@@ -33,7 +33,7 @@ def send_data(connection:connection,json : json) -> None:
     """
     connection.send(json.encode())
 # receive data from client
-def recv_data(connection: connection) -> json:
+def recive_data(connection: connection) -> json:
     """function to recieve data from client
 
     Args:
@@ -80,8 +80,13 @@ def accpet_client_data(connection : connection) -> None:
     """
     while True:
         try:
-            data = recv_data(connection)
-            print(data)
+            data = recive_data(connection)
+            data = json_parser(data)
+            for key in data:
+                value=data[key]
+                for key2 in value:
+                    value2=value[key2]
+                    print(value2)
             
             time.sleep(random.randint(1,10))
         except:           
@@ -99,4 +104,3 @@ if __name__== '__main__':
         start_new_thread(accpet_client_data, (connection,))
         
         
-    
