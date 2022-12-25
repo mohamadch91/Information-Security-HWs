@@ -99,7 +99,15 @@ def print_data(data : dict) -> None:
         for key2 in value:
             value2=value[key2]
             print(value2)
+def input_data() -> dict:
+    """input data
 
+    Returns:
+        dict: input data
+    """
+    data={}
+    data["command"]=input("Enter command: ")
+    return data
 def accpet_client_data(connection : connection) -> None:
     """accept client data and send command to client
     Args:
@@ -110,15 +118,12 @@ def accpet_client_data(connection : connection) -> None:
     """
     while True:
         try:
-            command=input("Enter command: ")
-            input_data={}
-            input_data["command"]=command
-            input_data=json_convert(input_data)
-            send_command(connection,input_data)
+            input=input_data()
+            input=json_convert(input)
+            send_command(connection,input)
             data = recieve_data(connection)
             data = json_parser(data)
             print_data(data)
-            
             time.sleep(random.randint(1,10))
         except:           
             connection.close()
