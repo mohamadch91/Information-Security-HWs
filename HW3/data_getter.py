@@ -6,7 +6,7 @@ import socket
 import uuid
 import re
 
-def get_size(bytes, suffix="B"):
+def get_size(bytes: int, suffix="B") -> str:
     """
     Scale bytes to its proper format
     e.g:
@@ -19,110 +19,83 @@ def get_size(bytes, suffix="B"):
             return f"{bytes:.2f}{unit}{suffix}"
         bytes /= factor
 
-def System_information():
-    print("="*40, "System Information", "="*40)
+def System_information() -> dict:
+    """get system information
+    Returns:
+        dict: system information
+    """
+    system_information = {}
+    main={}
+    main['name']="="*40, "System Information", "="*40
     uname = platform.uname()
-    print(f"System: {uname.system}")
-    print(f"Node Name: {uname.node}")
-    print(f"Release: {uname.release}")
-    print(f"Version: {uname.version}")
-    print(f"Machine: {uname.machine}")
-    print(f"Processor: {uname.processor}")
-    print(f"Processor: {cpuinfo.get_cpu_info()['brand_raw']}")
-    print(f"Ip-Address: {socket.gethostbyname(socket.gethostname())}")
-    print(f"Mac-Address: {':'.join(re.findall('..', '%012x' % uuid.getnode()))}")
-
-
+    main['system'] = f"System: {uname.system}"
+    main['node_name'] = f"Node Name: {uname.node}"
+    main['release'] = f"Release: {uname.release}"
+    main['version'] = f"Version: {uname.version}"
+    main['machine'] = f"Machine: {uname.machine}"
+    main['processor'] = f"Processor: {cpuinfo.get_cpu_info()['brand_raw']}"
+    main['ip_address'] = f"Ip-Address: {socket.gethostbyname(socket.gethostname())}"
+    main['mac_address'] = f"Mac-Address: {':'.join(re.findall('..', '%012x' % uuid.getnode()))}"
+    
+    system_information['main']=main
     # Boot Time
-    print("="*40, "Boot Time", "="*40)
+    main={}
+    main['name']="="*40, "Boot Time", "="*40
     boot_time_timestamp = psutil.boot_time()
     bt = datetime.fromtimestamp(boot_time_timestamp)
-    print(f"Boot Time: {bt.year}/{bt.month}/{bt.day} {bt.hour}:{bt.minute}:{bt.second}")
-
-
-    # print CPU information
-    print("="*40, "CPU Info", "="*40)
+    main['boot_time'] = f"Boot Time: {bt.year}/{bt.month}/{bt.day} {bt.hour}:{bt.minute}:{bt.second}"
+    system_information['boot_time']=main
+    main={}
+    main['name']="="*40, "CPU Info", "="*40
     # number of cores
-    print("Physical cores:", psutil.cpu_count(logical=False))
-    print("Total cores:", psutil.cpu_count(logical=True))
+    main['physical_cores'] = f"Physical cores: {psutil.cpu_count(logical=False)}"
+    main['total_cores'] = f"Total cores: {psutil.cpu_count(logical=True)}"
     # CPU frequencies
     cpufreq = psutil.cpu_freq()
-    print(f"Max Frequency: {cpufreq.max:.2f}Mhz")
-    print(f"Min Frequency: {cpufreq.min:.2f}Mhz")
-    print(f"Current Frequency: {cpufreq.current:.2f}Mhz")
+    main['max_frequency'] = f"Max Frequency: {cpufreq.max:.2f}Mhz"
+    main['min_frequency'] = f"Min Frequency: {cpufreq.min:.2f}Mhz"
+    main['current_frequency'] = f"Current Frequency: {cpufreq.current:.2f}Mhz"
     # CPU usage
-    print("CPU Usage Per Core:")
+    main['cpu_usage_per_core'] = "CPU Usage Per Core:"
     for i, percentage in enumerate(psutil.cpu_percent(percpu=True, interval=1)):
-        print(f"Core {i}: {percentage}%")
-    print(f"Total CPU Usage: {psutil.cpu_percent()}%")
-
+        main['cpu_usage_per_core'] += f"Core {i}: {percentage}%"
+    main['total_cpu_usage'] = f"Total CPU Usage: {psutil.cpu_percent()}%"
+    system_information['cpu_info']=main
+    
 
     # Memory Information
-    print("="*40, "Memory Information", "="*40)
+    main={}
+    main['name']="="*40, "Memory Information", "="*40
     # get the memory details
     svmem = psutil.virtual_memory()
-    print(f"Total: {get_size(svmem.total)}")
-    print(f"Available: {get_size(svmem.available)}")
-    print(f"Used: {get_size(svmem.used)}")
-    print(f"Percentage: {svmem.percent}%")
-
-
-
-    print("="*20, "SWAP", "="*20)
+    main['total'] = f"Total: {get_size(svmem.total)}"
+    main['available'] = f"Available: {get_size(svmem.available)}"
+    main['used'] = f"Used: {get_size(svmem.used)}"
+    main['percentage'] = f"Percentage: {svmem.percent}%"
+    system_information['memory_info']=main
+    # Swap Memory
+    main={}
+    main['name']="="*40, "Swap Memory", "="*40
     # get the swap memory details (if exists)
     swap = psutil.swap_memory()
-    print(f"Total: {get_size(swap.total)}")
-    print(f"Free: {get_size(swap.free)}")
-    print(f"Used: {get_size(swap.used)}")
-    print(f"Percentage: {swap.percent}%")
+    main['total'] = f"Total: {get_size(swap.total)}"
+    main['free'] = f"Free: {get_size(swap.free)}"
+    main['used'] = f"Used: {get_size(swap.used)}"
+    main['percentage'] = f"Percentage: {swap.percent}%"
+    
 
-
-
-    # Disk Information
-    print("="*40, "Disk Information", "="*40)
-    print("Partitions and Usage:")
-    # get all disk partitions
-    partitions = psutil.disk_partitions()
-    for partition in partitions:
-        print(f"=== Device: {partition.device} ===")
-        print(f"  Mountpoint: {partition.mountpoint}")
-        print(f"  File system type: {partition.fstype}")
-        try:
-            partition_usage = psutil.disk_usage(partition.mountpoint)
-        except PermissionError:
-            # this can be catched due to the disk that
-            # isn't ready
-            continue
-        print(f"  Total Size: {get_size(partition_usage.total)}")
-        print(f"  Used: {get_size(partition_usage.used)}")
-        print(f"  Free: {get_size(partition_usage.free)}")
-        print(f"  Percentage: {partition_usage.percent}%")
-    # get IO statistics since boot
-    disk_io = psutil.disk_io_counters()
-    print(f"Total read: {get_size(disk_io.read_bytes)}")
-    print(f"Total write: {get_size(disk_io.write_bytes)}")
+  
+       
+    system_information['swap_memory']=main
 
     ## Network information
-    print("="*40, "Network Information", "="*40)
-    ## get all network interfaces (virtual and physical)
-    if_addrs = psutil.net_if_addrs()
-    for interface_name, interface_addresses in if_addrs.items():
-        for address in interface_addresses:
-            print(f"=== Interface: {interface_name} ===")
-            if str(address.family) == 'AddressFamily.AF_INET':
-                print(f"  IP Address: {address.address}")
-                print(f"  Netmask: {address.netmask}")
-                print(f"  Broadcast IP: {address.broadcast}")
-            elif str(address.family) == 'AddressFamily.AF_PACKET':
-                print(f"  MAC Address: {address.address}")
-                print(f"  Netmask: {address.netmask}")
-                print(f"  Broadcast MAC: {address.broadcast}")
+
     ##get IO statistics since boot
+    main={}
     net_io = psutil.net_io_counters()
-    print(f"Total Bytes Sent: {get_size(net_io.bytes_sent)}")
-    print(f"Total Bytes Received: {get_size(net_io.bytes_recv)}")
-
-
-if __name__ == "__main__":
-
-    System_information()
+    main['name']="="*40, "Network Information", "="*40
+    main['bytes_sent'] = f"Total Bytes Sent: {get_size(net_io.bytes_sent)}"
+    main['bytes_recv'] = f"Total Bytes Received: {get_size(net_io.bytes_recv)}"
+    system_information['network_info']=main
+    # Disk Information
+    return system_information
