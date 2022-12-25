@@ -24,14 +24,7 @@ def create_server(ip :str, port :str) ->socket :
     socket_obj.listen()
     return socket_obj
 # send data to client
-def send_data(connection:connection,json : json) -> None:
-    """send data to client connected
 
-    Args:
-        connection (connection): Socket connection between client and server
-        json (json): data to send
-    """
-    connection.send(json.encode())
 # receive data from client
 def recive_data(connection: connection) -> json:
     """function to recieve data from client
@@ -69,9 +62,46 @@ def json_parser(data : json) -> dict:
 
     """
     return json.loads(data)
+def send_command(connection : connection, command :str) -> None:
+    """send command to client
+
+    Args:
+        connection (connection): Socket connection between client and server
+        command (str): command to send
+
+    Returns:
+        None
+    """
+    connection.send(command.encode())
+def json_convert (data: dict) -> json:
+    """convert data to json
+    
+    Args:
+        data (dict): data to convert
+    
+    Returns:
+        json: converted data
+
+    """
+    return json.dumps(data)
+
+def print_data(data : dict) -> None:
+    """print data
+
+    Args:
+        data (dict): data to print
+
+    Returns:
+        None
+    """
+    for key in data:
+        value=data[key]
+        for key2 in value:
+            value2=value[key2]
+            print(value2)
 
 def accpet_client_data(connection : connection) -> None:
-    """accept client data
+    """accept client data and send command to client
     Args:
         connection (connection): Socket connection between client and server
     
@@ -80,13 +110,11 @@ def accpet_client_data(connection : connection) -> None:
     """
     while True:
         try:
+            input_data=input("Enter command: ")
+            send_command(connection,input_data)
             data = recive_data(connection)
             data = json_parser(data)
-            for key in data:
-                value=data[key]
-                for key2 in value:
-                    value2=value[key2]
-                    print(value2)
+            print_data(data)
             
             time.sleep(random.randint(1,10))
         except:           
