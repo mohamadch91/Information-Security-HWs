@@ -14,3 +14,19 @@ This project is a simple client-server python CLI tool to get data from a client
 ```bash
 pip3 install -r requirements.txt
 ```
+
+## Usage
+
+### Server
+
+```bash
+python3 server.py
+```
+
+### Client
+
+```bash
+python3 client.py
+```
+
+
