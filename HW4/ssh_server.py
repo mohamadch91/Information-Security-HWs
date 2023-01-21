@@ -1,8 +1,8 @@
 import paramiko
 
-from .server_base import ServerBase
-from .ssh_server_interface import SshServerInterface
-from .shell import Shell
+from server_base import ServerBase
+from ssh_server_interface import SshServerInterface
+from shell import Shell
 
 class SshServer(ServerBase):
 
